@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -40,11 +40,11 @@ class User extends Authenticatable
 
     public function jobs()
     {
-        return $this->hasMany('App\Job');
+        return $this->hasMany('App\Models\Job');
     }
 
     public function companies()
     {
-        return $this->hasMany('App\Company');
+        return $this->hasMany('App\Models\Company');
     }
 }
