@@ -12,7 +12,7 @@ if($_POST = array_map('trim', $_POST)) {
       $sqlite->create('jobs', array_keys($values));
       $sqlite->insert('jobs', $values);
 
-      $values = array_fill_keys(array_keys($values), null);
+      define('REDIRECT', '/jobs/');
     }
   }
 }
