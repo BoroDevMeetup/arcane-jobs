@@ -9,8 +9,12 @@ if($_POST = array_map('trim', $_POST)) {
     $errors = $validate($values);
 
     if(empty($errors)) {
-      $sqlite->create('jobs', array_keys($values));
-      $sqlite->insert('jobs', $values);
+      $data = array_merge($values, [
+        'date' => date('Y-m-d H:i:s')
+      ]);
+
+      $sqlite->create('jobs', array_keys($data));
+      $sqlite->insert('jobs', $data);
 
       define('REDIRECT', '/jobs/');
     }
@@ -30,7 +34,7 @@ if($_POST = array_map('trim', $_POST)) {
       <select name="<?= $name; ?>"<?= $if(isset($errors[$name]), 'error', 'class'); ?>>
         <option disabled="disabled" selected="selected"><?= $field['placeholder']; ?><?= $if($errors[$name] ?? false); ?></option>
         <?php foreach($field['options'] as $value => $option) { ?>
-          <option value="<?= $value; ?>"><?= $option; ?></option>
+          <option value="<?= $value; ?>"<?= $if($value == $values[$name], 'selected="selected"'); ?>><?= $option; ?></option>
         <?php } ?>
       </select>
     <?php break; } ?>
