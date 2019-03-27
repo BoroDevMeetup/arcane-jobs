@@ -1,22 +1,33 @@
 <?php
 
 if(path(2)) {
-  $job = $sqlite->select('jobs', [
-    'id' => path(2)
-  ])[0];
+  if(path(2) == 'type') {
+    $types = $fields['employment']['options'];
+    $jobs = $sqlite->select('jobs', [
+      'employment' => path(3)
+    ]);
 
-  define('ROUTE', [
-    ["{$job['id']}"]
-  ]);
+    define('ROUTE', [
+      ['type', array_keys($types)]
+    ]);
+  } else {
+    $job = $sqlite->select('jobs', [
+      'id' => path(2)
+    ])[0];
+
+    define('ROUTE', [
+      ["{$job['id']}"]
+    ]);
+  }
 } else {
   $jobs = $sqlite->select('jobs');
 }
 
 ?>
 
-<?php if(path(2)) { ?>
+<?php if(path(2) && path(2) != 'type') { ?>
   <h1><a href="<?= path('/jobs/'); ?>">Jobs</a></h1>
-  <h2><?= $job['title']; ?><?= $if($job['company'], $job['company'], '(%s)'); ?></h2>
+  <h2><?= $job['title']; ?><?= $if($job['company'], null, ' (%s)'); ?></h2>
   <p><?= $job['description']; ?></p>
   <ul>
     <li>Location: <?= $job['location']; ?></li>
@@ -31,11 +42,11 @@ if(path(2)) {
     <?php } ?>
   </ul>
 <?php } else { ?>
-  <h1>Jobs</h1>
-  <?php if($jobs) { ?>
+  <h1><?= $if(path(3), $types[path(3)] ?? null, '%s '); ?>Jobs</h1>
+  <?php if(!empty($jobs)) { ?>
     <ul>
       <?php foreach(array_reverse($jobs) as $job) { ?>
-        <li><a href="<?= path("/jobs/{$job['id']}/"); ?>"><?= $job['title']; ?><?= $if($job['company'], $job['company'], '(%s)'); ?></a><br /><?= $truncate($job['description']); ?></li>
+        <li><a href="<?= path("/jobs/{$job['id']}/"); ?>"><?= $job['title']; ?><?= $if($job['company'], null, ' (%s)'); ?></a><br /><?= $truncate($job['description']); ?></li>
       <?php } ?>
     </ul>
   <?php } else { ?>
