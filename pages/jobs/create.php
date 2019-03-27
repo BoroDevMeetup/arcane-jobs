@@ -27,14 +27,14 @@ if($_POST = array_map('trim', $_POST)) {
 <form action="<?= path('/jobs/create/'); ?>" method="post" autocomplete="off">
   <?php foreach($fields as $name => $field) { ?>
     <?php switch($field['type']) { case 'text': ?>
-      <input name="<?= $name; ?>" value="<?= $values[$name]; ?>" placeholder="<?= $field['placeholder']; ?><?= $if($errors[$name] ?? false); ?>"<?= $if(isset($errors[$name]), 'error', 'class'); ?> />
+      <input name="<?= $name; ?>" value="<?= $values[$name] ?? null; ?>" placeholder="<?= $field['placeholder']; ?><?= $if($errors[$name] ?? false); ?>"<?= $if(isset($errors[$name]), 'error', 'class'); ?> />
     <?php break; case 'textarea': ?>
-      <textarea name="<?= $name; ?>" rows="5" placeholder="<?= $field['placeholder']; ?><?= $if($errors[$name] ?? false); ?>"<?= $if(isset($errors[$name]), 'error', 'class'); ?>><?= $values[$name]; ?></textarea>
+      <textarea name="<?= $name; ?>" rows="5" placeholder="<?= $field['placeholder']; ?><?= $if($errors[$name] ?? false); ?>"<?= $if(isset($errors[$name]), 'error', 'class'); ?>><?= $values[$name] ?? null; ?></textarea>
     <?php break; case 'select': ?>
       <select name="<?= $name; ?>"<?= $if(isset($errors[$name]), 'error', 'class'); ?>>
         <option disabled="disabled" selected="selected"><?= $field['placeholder']; ?><?= $if($errors[$name] ?? false); ?></option>
         <?php foreach($field['options'] as $value => $option) { ?>
-          <option value="<?= $value; ?>"<?= $if($value == $values[$name], 'selected="selected"'); ?>><?= $option; ?></option>
+          <option value="<?= $value; ?>"<?= $if($value == ($values[$name] ?? null), 'selected="selected"'); ?>><?= $option; ?></option>
         <?php } ?>
       </select>
     <?php break; } ?>
