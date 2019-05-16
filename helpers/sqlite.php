@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Sqlite 19.02.2 Arcane Helpers
+ * SQLite 19.02.2 Arcane Helper
  * https://github.com/MEDIA76/arcane
 **/
 
@@ -147,6 +147,6 @@ return new class {
 
     return $result ? $records ?? $record : $result;
   }
-}
+};
 
 ?>
