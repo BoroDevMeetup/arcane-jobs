@@ -20,10 +20,10 @@ return [
     'type' => 'select',
     'placeholder' => 'Employment Type',
     'options' => [
-      'internship' => 'Internship',
-      'freelance' => 'Freelance',
-      'parttime' => 'Part Time',
-      'fulltime' => 'Full Time'
+      'Internship',
+      'Freelance',
+      'Part Time',
+      'Full Time'
     ]
   ],
 
@@ -31,9 +31,9 @@ return [
     'type' => 'select',
     'placeholder' => 'Experience Range',
     'options' => [
-      'junior' => 'Junior',
-      'midlevel' => 'Midlevel',
-      'senior' => 'Senior'
+      'Junior',
+      'Midlevel',
+      'Senior'
     ]
   ],
 

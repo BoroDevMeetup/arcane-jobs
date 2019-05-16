@@ -33,8 +33,8 @@ if($_POST = array_map('trim', $_POST)) {
     <?php break; case 'select': ?>
       <select name="<?= $name; ?>"<?= $if(isset($errors[$name]), 'error', 'class'); ?>>
         <option disabled="disabled" selected="selected"><?= $field['placeholder']; ?><?= $if($errors[$name] ?? false); ?></option>
-        <?php foreach($field['options'] as $value => $option) { ?>
-          <option value="<?= $value; ?>"<?= $if($value == ($values[$name] ?? null), 'selected="selected"'); ?>><?= $option; ?></option>
+        <?php foreach($field['options'] as $index => $value) { ?>
+          <option value="<?= $value; ?>"<?= $if($value == ($values[$name] ?? null), 'selected="selected"'); ?>><?= $value; ?></option>
         <?php } ?>
       </select>
     <?php break; } ?>
