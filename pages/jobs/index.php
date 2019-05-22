@@ -23,7 +23,17 @@ if(path(2)) {
   $jobs = $sqlite->select('jobs');
 }
 
+if($oauth->connected) {
+  $user = $oauth->request('https://slack.com/api/users.identity')->user;
+}
+
 ?>
+
+<?php if(!$oauth->connected) { ?>
+  <a href="<?= $oauth->slack($env('SLACK_ID'), $env('SLACK_SECRET')); ?>">Sign in with Slack</a>
+<?php } else { ?>
+  <p>Welcome, <?= $user->name; ?>!</p>
+<?php } ?>
 
 <?php if(path(2) && path(2) != 'type') { ?>
   <h1><a href="<?= path('/jobs/'); ?>">Jobs</a></h1>
@@ -52,5 +62,7 @@ if(path(2)) {
   <?php } else { ?>
     <p>No jobs have been created.</p>
   <?php } ?>
-  <a href="<?= path('/jobs/create/'); ?>">Create Job</a>
+  <?php if($oauth->connected) { ?>
+    <a href="<?= path('/jobs/create/'); ?>">Create Job</a>
+  <?php } ?>
 <?php } ?>

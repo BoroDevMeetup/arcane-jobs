@@ -1,5 +1,9 @@
 <?php
 
+if(!$oauth->connected) {
+  define('REDIRECT', '/jobs/');
+}
+
 if($_POST = array_map('trim', $_POST)) {
   if(isset($_POST['create'])) {
     foreach($fields as $name => $field) {
