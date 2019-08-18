@@ -30,7 +30,7 @@ if($oauth->connected) {
 ?>
 
 <?php if(!$oauth->connected) { ?>
-  <a href="<?= $oauth->slack($env('SLACK_ID'), $env('SLACK_SECRET')); ?>">Sign in with Slack</a>
+  <a href="<?= $oauth->slack(env('SLACK_ID'), env('SLACK_SECRET')); ?>">Sign in with Slack</a>
 <?php } else { ?>
   <p>Welcome, <?= $user->name; ?>!</p>
 <?php } ?>
