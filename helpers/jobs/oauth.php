@@ -2,7 +2,7 @@
 
 /**
  * OAuth 19.05.2-A Arcane Helper
- * https://github.com/MEDIA76/arcane
+ * https://github.com/MEDIA76/arcane-helpers
 **/
 
 return new class {

@@ -10,5 +10,6 @@
     <main>
       <?= CONTENT; ?>
     </main>
+    <?= SCRIPTS; ?>
   </body>
 </html>
